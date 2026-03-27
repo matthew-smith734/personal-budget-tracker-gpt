@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+.env
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Data directory (mounted volume, not tracked)
+backend/data/
+data/
+
+# Node.js
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Test artifacts
+test.db
+.coverage
+coverage.xml
+htmlcov/
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.production

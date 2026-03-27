@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, JSON, Boolean, Float
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timezone
 from app.database import Base
 
 
@@ -17,7 +17,7 @@ class ImportRecord(Base):
     skipped_rows = Column(Integer, default=0)
     status = Column(String, default="pending")  # pending, completed, failed
     error_message = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     transactions = relationship("Transaction", back_populates="import_record")
 
@@ -32,4 +32,4 @@ class ImportedTransaction(Base):
     description = Column(String, nullable=False)
     original_data = Column(JSON, nullable=True)
     is_duplicate = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
