@@ -19,7 +19,7 @@ def export_transactions_csv(
     db: Session = Depends(get_db),
 ):
     """Export transactions as CSV."""
-    query = db.query(Transaction).filter(Transaction.is_duplicate == False)
+    query = db.query(Transaction).filter(Transaction.is_duplicate.is_(False))
     if account_id:
         query = query.filter(Transaction.account_id == account_id)
     if start_date:
@@ -56,7 +56,7 @@ def export_transactions_xlsx(
     """Export transactions as XLSX."""
     import pandas as pd
 
-    query = db.query(Transaction).filter(Transaction.is_duplicate == False)
+    query = db.query(Transaction).filter(Transaction.is_duplicate.is_(False))
     if account_id:
         query = query.filter(Transaction.account_id == account_id)
     if start_date:

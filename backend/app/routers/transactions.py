@@ -32,7 +32,7 @@ def list_transactions(
     limit: int = 100,
     db: Session = Depends(get_db),
 ):
-    query = db.query(Transaction).filter(Transaction.is_duplicate == False)
+    query = db.query(Transaction).filter(Transaction.is_duplicate.is_(False))
     if account_id:
         query = query.filter(Transaction.account_id == account_id)
     if category_id:
@@ -62,7 +62,7 @@ def create_transaction(transaction: TransactionCreate, db: Session = Depends(get
 @router.get("/summary")
 def get_summary(db: Session = Depends(get_db)):
     """Dashboard summary: total income, total expenses, net."""
-    transactions = db.query(Transaction).filter(Transaction.is_duplicate == False).all()
+    transactions = db.query(Transaction).filter(Transaction.is_duplicate.is_(False)).all()
     total_income = sum(t.amount for t in transactions if t.transaction_type == "credit")
     total_expenses = sum(abs(t.amount) for t in transactions if t.transaction_type == "debit")
     return {

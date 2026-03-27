@@ -37,7 +37,7 @@ def check_duplicate(
             Transaction.account_id == account_id,
             Transaction.date >= date_min,
             Transaction.date <= date_max,
-            Transaction.is_duplicate == False,
+            Transaction.is_duplicate.is_(False),
         )
         .all()
     )
